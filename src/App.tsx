@@ -29,7 +29,7 @@ function App() {
         onClick={onBasketClick}
       ></BasketList>
     </div>
-    {JSON.stringify(foods)}
+    {/* {JSON.stringify(foods)} */}
     </>
   );
 }
