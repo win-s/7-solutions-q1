@@ -1,25 +1,36 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+
+import './App.scss';
+import { useFood } from './share/hooks/useFood';
+import { WaitingList } from './share/components/WaitingList/WaitingList';
+import { BasketList } from './share/components/BasketList/BasketList';
+import { FoodCatagory } from './share/constants/food';
 
 function App() {
+  const {foods,onWaitingStatusClick,onBasketClick} = useFood();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <div className="list-column">
+      <WaitingList
+        className="waiting-list-column"
+        foods={foods}
+        onClick={onWaitingStatusClick}
+      ></WaitingList>
+      <BasketList
+        className="fruit-column"
+        foods={foods}
+        type={FoodCatagory.Fruit}
+        onClick={onBasketClick}
+      ></BasketList>
+      <BasketList
+        foods={foods}
+        type={FoodCatagory.Vegetable}
+        onClick={onBasketClick}
+      ></BasketList>
     </div>
+    {JSON.stringify(foods)}
+    </>
   );
 }
 

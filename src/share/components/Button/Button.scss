@@ -1,0 +1,14 @@
+.button{
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    border-width: 0;
+    font-size: 25px;
+    &:hover{
+        cursor: pointer;
+    }
+
+    &:not(:last-child){
+        margin-bottom: 10px;
+    }
+}

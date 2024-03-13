@@ -1,0 +1,15 @@
+.basket-list-wrapper{
+    border: solid 1px #f0f0f0;
+    flex: 1;
+    .basket-list-header{
+        font-weight: bold;
+        background-color: #f1f3f5;
+        border-bottom: solid 1px #f0f0f0;
+        padding: 10px;
+        text-align: center;
+        font-size: 25px;
+    }
+    .basket-list-items{
+        padding: 10px;
+    }
+}
