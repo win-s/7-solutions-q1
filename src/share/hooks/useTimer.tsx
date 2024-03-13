@@ -18,7 +18,7 @@ export const useTimer = (duration:number,onTimeOut: (foods:Timer[])=>void)=>{
     stateRef.current = foodsTimer;
 
     const onAddFood = (food:Food)=>{
-        console.log('onAddFood'+JSON.stringify(foodsTimer));
+        // console.log('onAddFood'+JSON.stringify(foodsTimer));
         const newFoodsTimeOut = [
             ...foodsTimer.foods,
             {
@@ -44,7 +44,7 @@ export const useTimer = (duration:number,onTimeOut: (foods:Timer[])=>void)=>{
     }
 
     function clearFoodsTimeout(timer:number){
-        console.log(JSON.stringify(stateRef.current));
+        // console.log(JSON.stringify(stateRef.current));
         const foodsTimeout: Timer[] = [];
         const foodsTimer = stateRef.current;
         
