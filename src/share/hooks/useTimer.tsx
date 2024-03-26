@@ -13,12 +13,12 @@ export interface FoodTimer{
 
 export const useTimer = (duration:number,onTimeOut: (foods:Timer[])=>void)=>{
 
-    const [foodsTimer,setFoodsTimer] = useState<FoodTimer>({foods:[],time:0});
-    const stateRef = useRef<FoodTimer>();
-    stateRef.current = foodsTimer;
+    const stateRef = useRef<FoodTimer>({foods:[],time:0});
+
 
     const onAddFood = (food:Food)=>{
-        // console.log('onAddFood'+JSON.stringify(foodsTimer));
+
+        const foodsTimer = stateRef.current;
         const newFoodsTimeOut = [
             ...foodsTimer.foods,
             {
@@ -26,25 +26,30 @@ export const useTimer = (duration:number,onTimeOut: (foods:Timer[])=>void)=>{
                 time: foodsTimer.time+1,
             }
         ];
-        setFoodsTimer((foodsTimer)=>({
+
+        stateRef.current = {
             ...foodsTimer,
             foods: newFoodsTimeOut
-        }));
+        }
     }
     const onRemoveFood = (id:string)=>{
+        const foodsTimer = stateRef.current;
+
         const index = foodsTimer.foods.findIndex( timer => timer.food.name === id );
         const newFoodsTimeOut = [
             ...foodsTimer.foods.slice(0,index),
             ...foodsTimer.foods.slice(index+1),
         ];
-        setFoodsTimer((foodsTimer)=>({
+
+        stateRef.current = {
             ...foodsTimer,
             foods: newFoodsTimeOut
-        }));
+        }
     }
+    
 
     function clearFoodsTimeout(timer:number){
-        // console.log(JSON.stringify(stateRef.current));
+
         const foodsTimeout: Timer[] = [];
         const foodsTimer = stateRef.current;
         
@@ -59,23 +64,20 @@ export const useTimer = (duration:number,onTimeOut: (foods:Timer[])=>void)=>{
         }
         
         if(foodsTimeout.length !==0){
-            setFoodsTimer((foodsTimer)=>{
+
+            stateRef.current = {
                 
-                return ({
-                
-                    foods: foodsTimer.foods.slice(foodsTimeout.length),
-                    time: timer,
-                })
-            });
+                foods: foodsTimer.foods.slice(foodsTimeout.length),
+                time: timer,
+            };
             onTimeOut(foodsTimeout);
         }else{
-            setFoodsTimer((foodsTimer)=>{
-                // console.log('insideSetTimer',JSON.stringify(foodsTimer));
-                return ({
-                    ...foodsTimer,
-                    time: timer,
-                })
-            });
+
+            const foodsTimer = stateRef.current;
+            stateRef.current = {
+                ...foodsTimer,
+                time: timer,
+            }
         }
         
     }

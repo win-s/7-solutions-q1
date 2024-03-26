@@ -8,7 +8,7 @@ export const getBasketList = (foods:Food[],type:FoodCatagory) => foods
     .filter( 
         food => food.status === CatagoryStatus.Basket
                 && food.type === type
-    ).sort( (a:Food,b:Food) => a.index < b.index ? -1 : a.index === b.index ? 0:1 );
+    )
 
 export const BasketList: React.FC<{
  foods: Food[],
